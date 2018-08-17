@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8" />
+<title>hello code</title>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	function refreshCaptcha() {
+		vurl = $("#kaptcha").attr("src");
+		$("#kaptcha").attr("src", vurl + "?t=" + Math.random());
+	}
+	
+	$(document).on("click", "#login_btn", function() {
+		var randomAnim = Math.floor(Math.random() * 7);
+		var _ctx = "/";
+		$.ajax({
+			url : _ctx + "login",
+			type : 'POST',
+			data : $("#login_form").serialize(),
+			success : function(data) {
+				console.log(data);
+			},
+			error : function() {
+				console.log('plseae refresh valid code');
+			}
+		});
+		return false;
+	});
+	$(document).on("click", "#logout_btn", function() {
+		var _ctx = "/";
+		$.ajax({
+			url : _ctx + "logout",
+			type : 'POST',
+		});
+		location='/home'
+		return false;
+	});
+</script>
+</head>
+
+<body>
+	<section class="box-login v5-input-txt" id="box-login">
+		<form id="login_form" th:action="@{/login}" method="post" autocomplete="off">
+			<ul>
+				<li class="form-group"><input class="form-control" type="text" min="4" maxlength="20" name="username" placeholder="请输入用户名或邮箱" required="required" /></li>
+				<li class="form-group"><input class="form-control" type="password" minlength="6" maxlength="100" id="password" name="password" placeholder="请输入密码" required="required" /></li>
+				<li class="form-group"><input type="text" class="form-control pull-left margin-r-5" name="image_kaptcha" style="width: 10%;" placeholder="验证码" /> <img
+					style="width: 100; display: inline;" class="form-control" id="kaptcha" src="/sys/img_code" title="click refresh" onclick="javascript:refreshCaptcha();" /> 
+					<div class="clear"></div></li>
+			</ul>
+		</form>
+		<div class="marginB10">
+			<button id="login_btn" type="button" class="btn btn-micv5 btn-block globalLogin">登录</button>
+			<button id="logout_btn" type="button" class="btn btn-micv5 btn-block globalLogin">注销</button>
+			<div id="login-form-tips" class="tips-error bg-danger" style="display: none;">错误提示</div>
+		</div>
+	</section>
+</body>
+</html>
