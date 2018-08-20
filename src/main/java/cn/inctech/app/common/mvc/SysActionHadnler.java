@@ -11,9 +11,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cn.inctech.app.common.exception.UDException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,6 +18,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import cn.inctech.app.common.exception.UDException;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @ControllerAdvice
 public class SysActionHadnler {
 	
@@ -48,6 +49,6 @@ public class SysActionHadnler {
 		return m;
 	}
 	
-	final Logger log = LoggerFactory.getLogger(this.getClass());
+	/*final Logger log = LoggerFactory.getLogger(this.getClass());*/
 	
 }
