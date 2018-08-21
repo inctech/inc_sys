@@ -1,4 +1,4 @@
-package cn.inctech.app.sys.bean;
+package cn.inctech.app.common.cfg.bean;
 
 import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_ALLOW_CSS;
 import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_ALLOW_FONTS;
@@ -10,8 +10,12 @@ import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGIN_PAGE;
 import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGIN_PASS_ERROR;
 import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGIN_SUCCESS;
 import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGOUT;
+import static cn.inctech.app.sys.param.SysParam.CU_KEY_USERNAME;
+import static cn.inctech.app.sys.param.SysParam.SQL_QUERY_AUTH_BY_NAME;
+import static cn.inctech.app.sys.param.SysParam.SQL_QUERY_USER_BY_NAME;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -19,8 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -33,7 +35,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import cn.inctech.app.common.security.spring.KaptchaAuthenticationFilter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecConfig extends WebSecurityConfigurerAdapter {
@@ -57,6 +61,9 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth) throws IOException, ServletException {
+                    	String cur_user=auth.getName();
+                    	log.info("[current user:]"+cur_user+" has logged in");
+                    	currentUser.put(CU_KEY_USERNAME, cur_user);
                     	request.getRequestDispatcher(URL_LOGIN_SUCCESS).forward(request, response);
                     }
                 })
@@ -76,15 +83,14 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
         
     }
     
-    final Logger log = LoggerFactory.getLogger(this.getClass());
     static final String KEY = "inctech.cn";
-    static final String SQL_QUERY_USER_BY_NAME="select userid,password,‘1’ from select * from s_user where userid =?";
-    static final String SQL_QUERY_AUTH_BY_NAME="select u.userid username,r.rolename as authority from s_user u join s_user_role ur on u.userid=ur.userid join s_role r on r.roleid=ur.roleid where u.userid=?";
     
     @Value("${webapp.content_type.json}") String json_content_type;
     @Value("${kaptcha.chkurl}") String kaptcha_url;
     
     @Resource PasswordEncoder passwordEncoder;
     @Resource DataSource dataSource;
+    
+    @Resource Map<String,Object> currentUser;
     
 }

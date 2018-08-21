@@ -2,10 +2,14 @@ package cn.inctech.app.common.cfg.bean;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -43,5 +47,12 @@ public class BeanConfig {
         restTemplate.setRequestFactory(requestFactory);
         return restTemplate;
     }
+	
+	@Bean
+	@Scope(value="session",proxyMode = ScopedProxyMode.TARGET_CLASS)
+	public Map<String,Object> currentUser(){
+		Map<String,Object> cu=new HashMap<>();
+		return cu;
+	}
 	
 }
