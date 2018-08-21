@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import cn.inctech.app.biz.demo.hello.service.HelloServiceImp;
 import cn.inctech.app.biz.demo.user.dao.UserModel;
 
 @RunWith(SpringRunner.class)
@@ -21,7 +22,7 @@ public class UserServiceImpTest {
 	public void testQueryUser() {
 	}
 
-	@Test
+	/*@Test*/
 	public void testInsert() {
 		UserModel u=new UserModel();
 		u.setDescr("Hello");
@@ -34,9 +35,11 @@ public class UserServiceImpTest {
 	}
 
 	@Test
-	public void testUpdate() {
+	public void testTransaction() {
+		hs.insert_trans_test();
 	}
 	
 	@Resource UserService us;
+	@Resource HelloServiceImp hs;
 
 }

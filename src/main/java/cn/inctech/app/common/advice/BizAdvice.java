@@ -1,5 +1,8 @@
 package cn.inctech.app.common.advice;
 
+import static cn.inctech.app.sys.param.SysParam.POINTCUT_DAO;
+import static cn.inctech.app.sys.param.SysParam.POINTCUT_SERVICE;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -7,7 +10,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BizAdvice {
 	
 	@Around("pointcut_dao() || pointcut_service()")
-	public Object dao_handle(ProceedingJoinPoint pjp) throws Throwable {
+	public Object biz_handle(ProceedingJoinPoint pjp) throws Throwable {
 		Object r=null;
 		String method="";
 		try {
@@ -29,10 +31,15 @@ public class BizAdvice {
 			log.info("mehtod--["+method+"] start at "+sdf.format(new Date())+"...");
 			r=pjp.proceed();
 		}catch(DataAccessException e) {
-			log.info("mehtod--["+method+"] error: "+e.getMessage());
+			log.error("mehtod--["+method+"] error: "+e.getMessage());
 			throw new BizLogicException(e);
-		}catch(Exception e) {
-			log.info("mehtod--["+method+"] error: "+e.getMessage());
+		}catch(BizLogicException e) {
+			throw e;
+		}catch(AppSysException e) {
+			throw e;
+		}
+		catch(Exception e) {
+			log.error("mehtod--["+method+"] error: "+e.getMessage());
 			throw new AppSysException(e);
 		}finally{
 			log.info("mehtod--["+method+"] end at "+sdf.format(new Date())+"...");
@@ -40,17 +47,13 @@ public class BizAdvice {
 		return r;
 	}
 	
-	@Pointcut(POINTCUT_SERVICE)  
+    @Pointcut(POINTCUT_SERVICE)  
     public void pointcut_service(){}
 	
 	@Pointcut(POINTCUT_DAO)  
     public void pointcut_dao(){}
 	
-	@Value("${webapp.pc.service}") String pc_service;
-	/*static final String POINTCUT_SERVICE="execution(* ${webapp.pc.service}.*(..))";
-	static final String POINTCUT_DAO="execution(* ${webapp.pc.dao}.*(..))";*/
-	
-	static final String POINTCUT_SERVICE="execution(* cn.inctech.app..*ServiceImp*.*(..))";
-	static final String POINTCUT_DAO="execution(* cn.inctech.app..*Mapper*.*(..))";
+	static final String L_POINTCUT_SERVICE="execution(* cn.inctech.app..*ServiceImp*.*(..))";
+	static final String L_POINTCUT_DAO="execution(* cn.inctech.app..*Mapper*.*(..)) || execution(* cn.inctech.app..*Dao*.*(..))";
 	static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 }
