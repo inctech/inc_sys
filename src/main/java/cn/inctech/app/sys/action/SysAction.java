@@ -25,7 +25,7 @@ public class SysAction {
 	
 	@RequestMapping(value = URL_LOGIN, method = RequestMethod.POST)
 	@ResponseBody
-    public void pass_error(@RequestParam(value = "error", required = false) String error) {
+    public void pass_error() {
 		throw new InsufficientAuthenticationException(RESULT_MSG_PASS_ERROR);
 	}
 	

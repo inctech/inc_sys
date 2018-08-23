@@ -3,6 +3,7 @@ package cn.inctech.app.common.cfg.param;
 public class GlobalConfig {
 
 	public static final String RESULT_MSG_VALID_CODE_ERR="verify code entered is wrong";
+	public static final String RESULT_MSG_VALID_CODE_BLANK="verify code is blank";
 	public static final String RESULT_MSG_SUCCESS_LOGIN="login success";
 	public static final String RESULT_MSG_PASS_ERROR="username or password is invalid";
 	
@@ -22,6 +23,7 @@ public class GlobalConfig {
 	
 	/***********************************URL**************************************************************/
 	public static final String URL_LOGIN_ERROR="/login?error";
+	public static final String URL_IMGCODE_ERROR="/imgcode_error";
 	public static final String URL_LOGIN_SUCCESS="/login_success";
 	public static final String URL_LOGIN_PASS_ERROR="/login_pass_error";
 	public static final String URL_LOGIN_PAGE="/login_page";

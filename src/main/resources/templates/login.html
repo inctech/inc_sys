@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="UTF-8" />
 <title>hello code</title>
+
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
@@ -32,9 +35,25 @@
 		var _ctx = "/";
 		$.ajax({
 			url : _ctx + "logout",
-			type : 'POST',
+			type : 'POST'
 		});
 		location='/home'
+		return false;
+	});
+	$(document).on("click", "#test01_btn", function() {
+		var c='&'+$("input[name='csrf']").val();
+		alert(c)
+		var url = "/talents/teacher/test01?curPage=1&pageSize=5"+c;
+		$.ajax({
+			url : url,
+			type : 'POST',
+			success : function(data) {
+				console.log(data);
+			},
+			error : function() {
+				console.log('plseae refresh valid code');
+			}
+		});
 		return false;
 	});
 </script>
@@ -50,11 +69,14 @@
 					style="width: 100; display: inline;" class="form-control" id="kaptcha" src="/sys/img_code" title="click refresh" onclick="javascript:refreshCaptcha();" /> 
 					<div class="clear"></div></li>
 			</ul>
+			<input type="hidden" id="csrf" name="csrf" th:value="${_csrf.parameterName} + '=' + ${_csrf.token}">
 		</form>
 		<div class="marginB10">
 			<button id="login_btn" type="button" class="btn btn-micv5 btn-block globalLogin">登录</button>
 			<button id="logout_btn" type="button" class="btn btn-micv5 btn-block globalLogin">注销</button>
+			<button id="test01_btn" type="button" class="btn btn-micv5 btn-block globalLogin">测试</button>
 			<div id="login-form-tips" class="tips-error bg-danger" style="display: none;">错误提示</div>
+			
 		</div>
 	</section>
 </body>

@@ -9,9 +9,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import com.google.code.kaptcha.servlet.KaptchaServlet;
+
+import cn.inctech.app.common.mvc.SysMvcInterceptor;
 
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurationSupport {
@@ -23,9 +27,22 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
                 .allowCredentials(false).maxAge(3600);
     }
 	
+	@Override
+    public void addInterceptors(InterceptorRegistry registry) {
+		InterceptorRegistration addInterceptor = registry.addInterceptor(sysMvcInterceptor());
+        addInterceptor.excludePathPatterns("/sys**");
+        addInterceptor.excludePathPatterns("/login**");
+        addInterceptor.addPathPatterns("/talents/**");
+    }
+	
 	@Bean 
 	public RequestContextListener requestContextListener(){
         return new RequestContextListener();
+    }
+	
+	@Bean 
+	public SysMvcInterceptor sysMvcInterceptor(){
+        return new SysMvcInterceptor();
     }
 	
 	@Bean

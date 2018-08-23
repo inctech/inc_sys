@@ -1,6 +1,7 @@
 package cn.inctech.app.common.security.spring;
 
-import static cn.inctech.app.common.cfg.param.GlobalConfig.*;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_MSG_VALID_CODE_ERR;
+
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -10,8 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
@@ -19,6 +18,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class KaptchaAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 	
     public KaptchaAuthenticationFilter(String servletPath, String failureUrl) {
@@ -41,12 +43,12 @@ public class KaptchaAuthenticationFilter extends AbstractAuthenticationProcessin
         }
         chain.doFilter(request, response);
     }
+    
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         return null;
     }
     
-    final Logger log = LoggerFactory.getLogger(this.getClass());
     String servletPath;
     @Value("${kaptcha.input.name}") String param_name="image_kaptcha";
     @Value("${kaptcha.session.key}") String skey="kaptcha.code";

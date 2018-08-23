@@ -1,6 +1,6 @@
 package cn.inctech.app.common.mvc;
 
-import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_BOOL_FAILED;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.*;
 import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_CODE_FAILED;
 import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_KEY_CODE;
 import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_KEY_MSG;
@@ -49,6 +49,16 @@ public class SysActionHadnler {
 		return m;
 	}
 	
-	/*final Logger log = LoggerFactory.getLogger(this.getClass());*/
+	@ExceptionHandler(Exception.class)//未预料的系统级别的异常
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public Map<String, Object> handle_unknow_exception(HttpServletRequest request, Exception e) {
+		log.debug(e.getMessage());
+		Map<String, Object> m = new HashMap<>();
+		m.put(RESULT_KEY_CODE,RETCODE_SYS_PROCESS_ERROR);
+		m.put(RESULT_KEY_SUCCESS, RESULT_BOOL_FAILED);
+		m.put(RESULT_KEY_MSG, e.getMessage());
+		return m;
+	}
 	
 }
