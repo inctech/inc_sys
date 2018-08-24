@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<title>hello code</title>
+
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	
+	$(document).on("click", "#test01_btn", function() {
+		var url = "/talents/teacher/test01?currentPage=1&pageSize=5";
+		$.ajax({
+			url : url,
+			type : 'POST',
+			data : $("#login_form").serialize(),
+			success : function(data) {
+				console.log(data);
+			},
+			error : function() {
+				console.log('error');
+			}
+		});
+		return false;
+	});
+</script>
+</head>
+
+<body>
+	<section class="box-login v5-input-txt" id="box-login">
+		<form id="login_form" th:action="@{/}" method="post" autocomplete="off">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+		</form>
+		<div class="marginB10">
+			<button id="test01_btn" type="button" class="btn btn-micv5 btn-block globalLogin">测试</button>
+			<div id="login-form-tips" class="tips-error bg-danger" style="display: none;">错误提示</div>
+			
+		</div>
+	</section>
+</body>
+</html>

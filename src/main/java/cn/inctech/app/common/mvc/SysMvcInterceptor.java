@@ -26,7 +26,7 @@ public class SysMvcInterceptor extends HandlerInterceptorAdapter {
 		String [] req_params= {CR_CURRENT_PAGE,CR_PAGE_SIEZ};
 		String val=null;
 		for(String k:req_params) {
-			if(StringUtils.isNotEmpty(val=request.getParameter(CR_CURRENT_PAGE)))
+			if(StringUtils.isNotEmpty(val=request.getParameter(k)))
 				currentUser.put(k, val);
 		}
 	}

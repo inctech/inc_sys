@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
@@ -29,10 +28,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	
 	@Override
     public void addInterceptors(InterceptorRegistry registry) {
-		InterceptorRegistration addInterceptor = registry.addInterceptor(sysMvcInterceptor());
-        addInterceptor.excludePathPatterns("/sys**");
-        addInterceptor.excludePathPatterns("/login**");
-        addInterceptor.addPathPatterns("/talents/**");
+        registry.addInterceptor(sysMvcInterceptor()).addPathPatterns("/talents/**").excludePathPatterns("/sys/**").excludePathPatterns("/login**");
+        super.addInterceptors(registry);
     }
 	
 	@Bean 

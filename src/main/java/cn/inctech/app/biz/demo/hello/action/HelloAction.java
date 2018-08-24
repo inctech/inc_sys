@@ -4,7 +4,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +24,6 @@ public class HelloAction {
 		return "login";
 	}
 	
-	@Secured({"admin","teacher"})
 	@ResponseBody
 	@RequestMapping("/talents/teacher/test01")
 	public String teacher_test01() {
