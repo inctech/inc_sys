@@ -1,10 +1,11 @@
 package cn.inctech.app.common.mvc;
 
-import static cn.inctech.app.common.cfg.param.GlobalConfig.*;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_BOOL_FAILED;
 import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_CODE_FAILED;
 import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_KEY_CODE;
 import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_KEY_MSG;
 import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_KEY_SUCCESS;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RETCODE_SYS_PROCESS_ERROR;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -61,4 +63,15 @@ public class SysActionHadnler {
 		return m;
 	}
 	
+	@ExceptionHandler(value =BindException.class)
+    @ResponseBody
+    public Map<String, Object> handleBindException(BindException ex) throws BindException {
+		Map<String, Object> m = new HashMap<>();
+        StringBuilder err_msg = new StringBuilder();
+        ex.getFieldErrors().stream().forEach(e->err_msg.append(e.getField()).append("=[").append(e.getRejectedValue()).append("]--").append(e.getDefaultMessage()).append("\n\r"));
+        m.put(RESULT_KEY_CODE,RETCODE_SYS_PROCESS_ERROR);
+		m.put(RESULT_KEY_SUCCESS, RESULT_BOOL_FAILED);
+		m.put(RESULT_KEY_MSG, err_msg.toString());
+        return m;
+    }
 }

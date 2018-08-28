@@ -36,6 +36,7 @@ public class GlobalConfig {
 	public static final String URL_ALLOW_CSS="/css/**";
 	public static final String URL_ALLOW_JS="/js/**";
 	public static final String URL_ALLOW_FONTS="/fonts/**";
+	public static final String URL_ALLOW_FAVICON="/favicon.ico";
 	
 	
 	/***********************************RETURN CODE*******************************************************/

@@ -53,8 +53,10 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterBefore(new KaptchaAuthenticationFilter(URL_LOGIN, URL_LOGIN_ERROR), UsernamePasswordAuthenticationFilter.class) //在认证用户名之前认证验证码，如果验证码错误，将不执行用户名和密码的认证
-                .authorizeRequests().antMatchers(kaptcha_url,URL_ALLOW_CSS, URL_ALLOW_JS, URL_ALLOW_FONTS, /*URL_ALLOW_INDEX,*/URL_LOGIN,URL_LOGIN_PAGE).permitAll()
+    	if(use_kaptcha)
+    		http.addFilterBefore(new KaptchaAuthenticationFilter(URL_LOGIN, URL_LOGIN_ERROR), UsernamePasswordAuthenticationFilter.class); //在认证用户名之前认证验证码，如果验证码错误，将不执行用户名和密码的认证
+    		http
+                .authorizeRequests().antMatchers(kaptcha_url,URL_ALLOW_CSS, URL_ALLOW_JS, URL_ALLOW_FONTS, URL_ALLOW_FAVICON,URL_LOGIN,URL_LOGIN_PAGE).permitAll()
                 .and().csrf().disable()
                 .formLogin()
                 .loginProcessingUrl(URL_LOGIN)
@@ -101,6 +103,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
     
     @Value("${webapp.content_type.json}") String json_content_type;
     @Value("${kaptcha.chkurl}") String kaptcha_url;
+    @Value("${webapp.use_kaptcha}") boolean use_kaptcha=true;
     
     @Resource PasswordEncoder passwordEncoder;
     @Resource DataSource dataSource;

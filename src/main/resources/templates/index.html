@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	
 	$(document).on("click", "#test01_btn", function() {
-		var url = "/talents/teacher/test01?currentPage=1&pageSize=5";
+		var url = "/talents/teacher/test01?currentPage=1&pageSize=2";
 		$.ajax({
 			url : url,
 			type : 'POST',
@@ -24,7 +24,50 @@
 				console.log('error');
 			}
 		});
-		return false;
+	});
+	$(document).on("click", "#test02_btn", function() {
+		var url = "/talents/teacher/test01?currentPage=2&pageSize=2";
+		$.ajax({
+			url : url,
+			type : 'POST',
+			data : $("#login_form").serialize(),
+			success : function(data) {
+				console.log(data);
+			},
+			error : function() {
+				console.log('error');
+			}
+		});
+	});
+	$(document).on("click", "#u_insert_btn", function() {
+		var url = "/user_insert";
+		$.ajax({
+			url : url,
+			type : 'POST',
+			data : $("#login_form").serialize(),
+			success : function(data) {
+				console.log(data);
+				if(data.code=-200)
+					console.log(data.message)
+			},
+			error : function() {
+				console.log('error');
+			}
+		});
+	});
+	$(document).on("click", "#u_query_btn", function() {
+		var url = "/user_query";
+		$.ajax({
+			url : url,
+			type : 'POST',
+			data : $("#login_form").serialize(),
+			success : function(data) {
+				console.log(data);
+			},
+			error : function() {
+				console.log('error');
+			}
+		});
 	});
 </script>
 </head>
@@ -33,11 +76,17 @@
 	<section class="box-login v5-input-txt" id="box-login">
 		<form id="login_form" th:action="@{/}" method="post" autocomplete="off">
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+			<input type="text" name="username" placeholder="username"/><br/>
+			<input type="password" name="password" placeholder="password"/><br/>
+			<input type="email" name="email" placeholder="email"/><br/>
+			<input type="tel" name="mobile" placeholder="mobile"/><br/>
+			<input type="date" name="birthday" placeholder="birthday"/><br/>
 		</form>
 		<div class="marginB10">
-			<button id="test01_btn" type="button" class="btn btn-micv5 btn-block globalLogin">测试</button>
-			<div id="login-form-tips" class="tips-error bg-danger" style="display: none;">错误提示</div>
-			
+			<button id="test01_btn" type="button" class="btn btn-micv5 btn-block globalLogin">分页测试1</button>
+			<button id="test02_btn" type="button" class="btn btn-micv5 btn-block globalLogin">分页测试2</button>
+			<button id="u_insert_btn" type="button" class="btn btn-micv5 btn-block globalLogin">新增user</button>
+			<button id="u_query_btn" type="button" class="btn btn-micv5 btn-block globalLogin">查询user</button>
 		</div>
 	</section>
 </body>

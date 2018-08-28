@@ -9,9 +9,11 @@ public class SysParam {
 	public static final String POINTCUT_DAO="execution(* cn.inctech.app..*Mapper*.*(..)) || execution(* cn.inctech.app..*Dao*.*(..))";
 	
 	//CR=>current_request	request CU=>current_user		session
-	
 	public static final String CR_CURRENT_PAGE="currentPage";
 	public static final String CR_PAGE_SIEZ="pageSize";
+	
+	public static final int DEFAULT_PAGE_INDEX=1;
+	public static final int DEFAULT_PAGE_SIEZ=20;
 	
 	public static final String CU_KEY_USERNAME="cu_username";
 	public static final String CU_KEY_USERROLE="cu_userrole";
