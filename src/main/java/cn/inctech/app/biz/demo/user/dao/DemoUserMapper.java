@@ -7,18 +7,18 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
-public interface UserMapper {
+public interface DemoUserMapper {
 
 	@Select("select * from s_user")
-	public List<UserModel> queryUsers();
+	public List<DemoUserModel> queryUsers();
 	
 	@Select("select * from s_user where userid=#{userid}")
-	public UserModel queryUser();
+	public DemoUserModel queryUser();
 	
 	@Insert("insert into s_user(userid,username,password,status,email,descr) values(#{userid},#{username},#{password},#{status},#{email},#{descr})")
-	public void insert(UserModel u);
+	public void insert(DemoUserModel u);
 	
 	@Insert("update s_user set userid=#{userid},username#{username},password=#{password},status=#{status},email=#{email},descr=#{descr} where userid=#{userid}")
-	public void update(UserModel u);
+	public void update(DemoUserModel u);
 	
 }

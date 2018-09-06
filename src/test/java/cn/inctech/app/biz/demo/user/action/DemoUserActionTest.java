@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 @SpringBootTest
 @AutoConfigureMockMvc
 @WebAppConfiguration
-public class UserActionTest {
+public class DemoUserActionTest {
 
 	@Test
 	public void testUser_insert()  throws Exception {

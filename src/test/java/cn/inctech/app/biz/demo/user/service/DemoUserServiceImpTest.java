@@ -8,11 +8,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import cn.inctech.app.biz.demo.hello.service.HelloServiceImp;
-import cn.inctech.app.biz.demo.user.dao.UserModel;
+import cn.inctech.app.biz.demo.user.dao.DemoUserModel;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceImpTest {
+public class DemoUserServiceImpTest {
 
 	@Test
 	public void testQueryUsers() {
@@ -24,7 +24,7 @@ public class UserServiceImpTest {
 
 	/*@Test*/
 	public void testInsert() {
-		UserModel u=new UserModel();
+		DemoUserModel u=new DemoUserModel();
 		u.setDescr("Hello");
 		u.setEmail("tom@inctech.cn");
 		u.setPassword("tom123");
@@ -39,7 +39,7 @@ public class UserServiceImpTest {
 		hs.insert_trans_test();
 	}
 	
-	@Resource UserService us;
+	@Resource DemoUserService us;
 	@Resource HelloServiceImp hs;
 
 }

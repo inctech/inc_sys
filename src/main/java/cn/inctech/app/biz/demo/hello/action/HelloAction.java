@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.inctech.app.biz.demo.user.dao.UserMapper;
+import cn.inctech.app.biz.demo.user.dao.DemoUserMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -35,6 +35,6 @@ public class HelloAction {
 		return r;
 	}
 	
-	@Resource UserMapper um;
+	@Resource DemoUserMapper um;
 	@Resource Map<String,Object> currentUser;
 }

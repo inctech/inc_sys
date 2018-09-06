@@ -6,8 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import cn.inctech.app.biz.demo.user.dao.UserMapper;
-import cn.inctech.app.biz.demo.user.dao.UserModel;
+import cn.inctech.app.biz.demo.user.dao.DemoUserMapper;
+import cn.inctech.app.biz.demo.user.dao.DemoUserModel;
 
 @Service
 public class HelloServiceImp {
@@ -16,7 +16,7 @@ public class HelloServiceImp {
 		String err_uid="tom_001";
 		Random r=new Random();
 		String random_uid="jack"+r.nextInt(100);
-		UserModel u=new UserModel();
+		DemoUserModel u=new DemoUserModel();
 		u.setDescr("Hello");
 		u.setEmail("tom@inctech.cn");
 		u.setPassword("tom123");
@@ -31,5 +31,5 @@ public class HelloServiceImp {
 		um.insert(u);
 	}
 	
-	@Resource UserMapper um;
+	@Resource DemoUserMapper um;
 }

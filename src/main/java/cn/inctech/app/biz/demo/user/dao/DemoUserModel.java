@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @SuppressWarnings("serial")
-public class UserModel implements Serializable {
+public class DemoUserModel implements Serializable {
 	
 	private String userid;
 	@NotBlank(message = "用户名称不能为空")
