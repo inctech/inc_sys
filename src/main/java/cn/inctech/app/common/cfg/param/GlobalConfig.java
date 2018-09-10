@@ -33,11 +33,12 @@ public class GlobalConfig {
 	
 	public static final String URL_INDEX="/index*";
 	
+	public static final String URL_ALLOW_USER_SELF_REGIST="/regist_user";
 	public static final String URL_ALLOW_CSS="/css/**";
 	public static final String URL_ALLOW_JS="/js/**";
 	public static final String URL_ALLOW_FONTS="/fonts/**";
 	public static final String URL_ALLOW_FAVICON="/favicon.ico";
-	
+	public static final String URL_ALLOW_TEST="/sys/test/**";
 	
 	/***********************************RETURN CODE*******************************************************/
 	public static final int RETCODE_NOT_INNER_SERVICE=440;//内部服务不存在

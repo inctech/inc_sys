@@ -49,7 +49,7 @@ kaptcha:
     char:
       length: 4
       space: 8
-      string: abcefgijkmnoqrsuvwxyz13579
+      string: abcefgijkmnoqrsuvwxyz0123456789
   background:
     clear:
       from: 247,247,247
@@ -67,4 +67,8 @@ webapp:
   pc:
     service: cn.inctech.app..*ServiceImp*
     dao: cn.inctech.app..*(Dao|Mapper)*
+  security:
+    jdbc:
+      sql_query_user_by_name: select userid,password,true from v_user where userid =?
+      sql_query_auth_by_name: select userid username,authority from v_userauth where userid=?
     

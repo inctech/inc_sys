@@ -40,6 +40,7 @@ public class BizAdvice {
 		}
 		catch(Exception e) {
 			log.error("mehtod--["+method+"] error: "+e.getMessage());
+			e.printStackTrace();
 			throw new AppSysException(e);
 		}finally{
 			log.info("mehtod--["+method+"] end at "+sdf.format(new Date())+"...");

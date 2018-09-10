@@ -1,18 +1,10 @@
 package cn.inctech.app.common.cfg.bean;
 
-import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_ALLOW_CSS;
-import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_ALLOW_FONTS;
-import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_ALLOW_JS;
-import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGIN;
-import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGIN_ERROR;
-import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGIN_PAGE;
-import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGIN_PASS_ERROR;
-import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGIN_SUCCESS;
 import static cn.inctech.app.common.cfg.param.GlobalConfig.*;
-import static cn.inctech.app.sys.param.SysParam.*;
+import static cn.inctech.app.sys.param.SysParam.CU_KEY_USERNAME;
 import static cn.inctech.app.sys.param.SysParam.CU_KEY_USERROLE;
-import static cn.inctech.app.sys.param.SysParam.SQL_QUERY_AUTH_BY_NAME;
-import static cn.inctech.app.sys.param.SysParam.SQL_QUERY_USER_BY_NAME;
+import static cn.inctech.app.sys.param.SysParam.SUB_APP_PATH_TALENTS;
+import static cn.inctech.app.sys.param.SysParam.SYS_PATH_TALENTS;
 
 import java.io.IOException;
 import java.util.Map;
@@ -46,8 +38,8 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
     
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(SQL_QUERY_USER_BY_NAME)
-		.authoritiesByUsernameQuery(SQL_QUERY_AUTH_BY_NAME)
+		auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(sql_query_user_by_name)
+		.authoritiesByUsernameQuery(sql_query_auth_by_name)
 		.passwordEncoder(passwordEncoder);
 	}
 	
@@ -56,7 +48,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
     	if(use_kaptcha)
     		http.addFilterBefore(new KaptchaAuthenticationFilter(URL_LOGIN, URL_LOGIN_ERROR), UsernamePasswordAuthenticationFilter.class); //在认证用户名之前认证验证码，如果验证码错误，将不执行用户名和密码的认证
     		http
-                .authorizeRequests().antMatchers(kaptcha_url,URL_ALLOW_CSS, URL_ALLOW_JS, URL_ALLOW_FONTS, URL_ALLOW_FAVICON,URL_LOGIN,URL_LOGIN_PAGE).permitAll()
+                .authorizeRequests().antMatchers(kaptcha_url,URL_ALLOW_CSS, URL_ALLOW_JS, URL_ALLOW_FONTS, URL_ALLOW_FAVICON,URL_LOGIN,URL_LOGIN_PAGE,URL_ALLOW_TEST,URL_ALLOW_USER_SELF_REGIST).permitAll()
                 .and().csrf().disable()
                 .formLogin()
                 .loginProcessingUrl(URL_LOGIN)
@@ -104,6 +96,9 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
     @Value("${webapp.content_type.json}") String json_content_type;
     @Value("${kaptcha.chkurl}") String kaptcha_url;
     @Value("${webapp.use_kaptcha}") boolean use_kaptcha=true;
+    
+    @Value("${webapp.security.jdbc.sql_query_user_by_name}") String sql_query_user_by_name;
+    @Value("${webapp.security.jdbc.sql_query_auth_by_name}") String sql_query_auth_by_name;
     
     @Resource PasswordEncoder passwordEncoder;
     @Resource DataSource dataSource;
