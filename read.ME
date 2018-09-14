@@ -56,3 +56,31 @@ private BigDecimal wage;
 @Email  验证是否是邮件地址，如果为null,不进行验证，算通过验证。
 @ScriptAssert(lang= ,script=, alias=)
 @URL(protocol=,host=, port=,regexp=, flags=)
+
+public String send_sms(String desc_mobile) {
+		String phoneNumber = desc_mobile;//"17615182526";
+	    String randomNum = randomNum4();
+	    String jsonContent = "{\"code\":\"" + randomNum + "\"}";
+
+	    Map<String, String> paramMap = new HashMap<>();
+	    paramMap.put("PhoneNumbers", phoneNumber);
+	    paramMap.put("SignName", sign_name);
+	    paramMap.put("TemplateCode", template_code);
+	    paramMap.put("TemplateParam", jsonContent);
+	    SendSmsResponse sendSmsResponse;
+		try {
+			sendSmsResponse = sms.sendSms(paramMap);
+			log.debug(sendSmsResponse.getBizId()+":"+sendSmsResponse.getCode()+":"+sendSmsResponse.getMessage());
+		} catch (ClientException e) {
+			e.printStackTrace();
+			throw new AppSysException(SMS_SEND_CODE_ERROR);
+		}
+	    
+	    /*if(!(sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK"))) {
+	        if(sendSmsResponse.getCode() == null) {//ud
+	        }
+	        if(!sendSmsResponse.getCode().equals("OK")) {//ud
+	        }
+	    }*/
+	    return randomNum;
+	}

@@ -48,7 +48,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
     	if(use_kaptcha)
     		http.addFilterBefore(new KaptchaAuthenticationFilter(URL_LOGIN, URL_LOGIN_ERROR), UsernamePasswordAuthenticationFilter.class); //在认证用户名之前认证验证码，如果验证码错误，将不执行用户名和密码的认证
     		http
-                .authorizeRequests().antMatchers(kaptcha_url,URL_ALLOW_CSS, URL_ALLOW_JS, URL_ALLOW_FONTS, URL_ALLOW_FAVICON,URL_LOGIN,URL_LOGIN_PAGE,URL_ALLOW_TEST,URL_ALLOW_USER_SELF_REGIST).permitAll()
+                .authorizeRequests().antMatchers(kaptcha_url,URL_ALLOW_CSS, URL_ALLOW_JS, URL_ALLOW_FONTS, URL_ALLOW_FAVICON,URL_LOGIN,URL_LOGIN_PAGE,URL_ALLOW_TEST,URL_SMS_CODE,URL_ALLOW_USER_SELF_REGIST).permitAll()
                 .and().csrf().disable()
                 .formLogin()
                 .loginProcessingUrl(URL_LOGIN)

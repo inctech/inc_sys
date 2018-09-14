@@ -71,4 +71,7 @@ webapp:
     jdbc:
       sql_query_user_by_name: select userid,password,true from v_user where userid =?
       sql_query_auth_by_name: select userid username,authority from v_userauth where userid=?
+  sms:
+    sign_name: IncTech
+    template_code: SMS_142090353
     

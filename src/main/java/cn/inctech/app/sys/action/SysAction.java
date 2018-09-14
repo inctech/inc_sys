@@ -5,14 +5,19 @@ import static cn.inctech.app.common.cfg.param.GlobalConfig.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.inctech.app.common.exception.AppSysException;
+import cn.inctech.app.common.util.GeneralUtil;
 
 @Controller
 public class SysAction {
@@ -59,5 +64,19 @@ public class SysAction {
 		r.put(RESULT_KEY_MSG, RESULT_MSG_PASS_ERROR);
 		return r;
 	}
+	
+	@RequestMapping(value = URL_SMS_CODE+"/{mobile}")
+	@ResponseBody
+    public Map<String,Object> get_sms_code(@PathVariable("mobile") String mobile,HttpServletRequest request) {
+		String code=gutil.send_sms(mobile);
+		request.getSession().setAttribute(SMS_CODE_KEY_OF_CUR_SESSION, code);
+		Map<String,Object> r=new HashMap<>();
+		r.put(RESULT_KEY_CODE, RESULT_CODE_SUCCESS);
+		r.put(RESULT_KEY_SUCCESS, RESULT_BOOL_SUCCESS);
+		r.put(RESULT_KEY_MSG, RESULT_MSG_SUCCESS_LOGIN);
+		return r;
+	}
+	
+	@Resource GeneralUtil gutil;
 	
 }

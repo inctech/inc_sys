@@ -19,8 +19,6 @@ public class GlobalConfig {
 	public static final int RESULT_CODE_SUCCESS=1;
 	public static final int RESULT_CODE_FAILED=-1;
 	
-	
-	
 	/***********************************URL**************************************************************/
 	public static final String URL_LOGIN_ERROR="/login?error";
 	public static final String URL_IMGCODE_ERROR="/imgcode_error";
@@ -29,7 +27,8 @@ public class GlobalConfig {
 	public static final String URL_LOGIN_PAGE="/login_page";
 	public static final String URL_LOGIN="/login";
 	public static final String URL_LOGOUT="/logout";
-	public static final String URL_KAPTCHA="/sys/code";
+	public static final String URL_IMG_CODE="/sys/img_code";
+	public static final String URL_SMS_CODE="/sys/sms_code";
 	
 	public static final String URL_INDEX="/index*";
 	
@@ -58,5 +57,7 @@ public class GlobalConfig {
 	public static final int RETCODE_CONSUMER_SIGN_ERROR=-205;//签名sign验证无效
 	public static final int RETCODE_TIME_OUT=-206;//超时
 	public static final int RETCODE_IP_ERROR=-208;//IP验证错误
+	
+	public static final String SMS_CODE_KEY_OF_CUR_SESSION="inctech_sms_code_key_of_cur_session";
 	
 }
