@@ -11,7 +11,7 @@ import cn.inctech.app.biz.demo.user.dao.DemoUserModel;
 import cn.inctech.app.common.exception.AppSysException;
 
 @Component
-public class SimpleSqlGenerator {
+public class SqlGeneratorBean {
 
 	public String updateSQL(Object entity, TableModel tab) {
 		return updateSQL(entity,tab,MYBATIS);
@@ -148,7 +148,7 @@ public class SimpleSqlGenerator {
 	static final String JDBC="jdbc";
 	
 	public static void main(String[] args) {
-		SimpleSqlGenerator sg=new SimpleSqlGenerator();
+		SqlGeneratorBean sg=new SqlGeneratorBean();
 		TableModel tab=new TableModel();
 		tab.setKeyname("id");
 		tab.setTablename("user");

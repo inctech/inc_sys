@@ -14,12 +14,25 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 
+import cn.inctech.app.common.dao.jdbc.sql.JdbcQueryBean;
 import cn.inctech.app.common.sms.aliyun.AliyunSms;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StartAppTests {
 
+	@Test
+	public void testJdbcQuery() {
+		String sql="select mobile from v_user where userid=:userid";
+		Map<String,Object> param=new HashMap<String,Object>();
+		param.put("userid", "admin");
+		String mobile=jqb.querySingle(sql, param).get("mobile")+"";
+		System.out.println(mobile);
+		sql="select count(*) count from v_user where userid=:userid";
+		Object c=jqb.querySingle(sql, param).get("count");
+		System.out.println(c+c.getClass().getName());
+	}
+	
 	@Test
 	public void pass() {
 		String p="A12345671234567891234567891234567891234567891234567891234567891234567890000000890";
@@ -68,4 +81,5 @@ public class StartAppTests {
 	
 	@Resource PasswordEncoder bcrPasswordEncoder;
 	@Resource AliyunSms sms;
+	@Resource JdbcQueryBean jqb;
 }

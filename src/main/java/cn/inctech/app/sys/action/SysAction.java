@@ -1,6 +1,21 @@
 package cn.inctech.app.sys.action;
 
-import static cn.inctech.app.common.cfg.param.GlobalConfig.*;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_BOOL_FAILED;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_BOOL_SUCCESS;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_CODE_FAILED;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_CODE_SUCCESS;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_KEY_CODE;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_KEY_MSG;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_KEY_SUCCESS;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_MSG_PASS_ERROR;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_MSG_SUCCESS_LOGIN;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_MSG_VALID_CODE_ERR;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.SMS_CODE_KEY_OF_CUR_SESSION;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGIN;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGIN_PAGE;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGIN_PASS_ERROR;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_LOGIN_SUCCESS;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.URL_SMS_CODE;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.inctech.app.common.exception.AppSysException;
-import cn.inctech.app.common.util.GeneralUtil;
+import cn.inctech.app.sys.bean.SysServiceBean;
 
 @Controller
 public class SysAction {
@@ -68,7 +83,7 @@ public class SysAction {
 	@RequestMapping(value = URL_SMS_CODE+"/{mobile}")
 	@ResponseBody
     public Map<String,Object> get_sms_code(@PathVariable("mobile") String mobile,HttpServletRequest request) {
-		String code=gutil.send_sms(mobile);
+		String code=ss.sendSmsCode(mobile);
 		request.getSession().setAttribute(SMS_CODE_KEY_OF_CUR_SESSION, code);
 		Map<String,Object> r=new HashMap<>();
 		r.put(RESULT_KEY_CODE, RESULT_CODE_SUCCESS);
@@ -77,6 +92,6 @@ public class SysAction {
 		return r;
 	}
 	
-	@Resource GeneralUtil gutil;
+	@Resource SysServiceBean ss;
 	
 }
