@@ -19,7 +19,7 @@ public class SysParam {
 	public static final String CU_KEY_USERNAME="cu_username";
 	public static final String CU_KEY_USERROLE="cu_userrole";
 	
-	public static final String SYS_PATH_TALENTS="/sys";
+	public static final String SYS_PATH="/sys";
 	
 	public static final String SUB_APP_PATH_TALENTS="/talents";
 	

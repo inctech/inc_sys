@@ -32,7 +32,7 @@ public class GlobalConfig {
 	
 	public static final String URL_INDEX="/index*";
 	
-	public static final String URL_ALLOW_USER_SELF_REGIST="/regist_user";
+	public static final String URL_ALLOW_USER_SELF_REGIST="/sys/user_regist";
 	public static final String URL_ALLOW_CSS="/css/**";
 	public static final String URL_ALLOW_JS="/js/**";
 	public static final String URL_ALLOW_FONTS="/fonts/**";
@@ -59,5 +59,5 @@ public class GlobalConfig {
 	public static final int RETCODE_IP_ERROR=-208;//IP验证错误
 	
 	public static final String SMS_CODE_KEY_OF_CUR_SESSION="inctech_sms_code_key_of_cur_session";
-	
+
 }

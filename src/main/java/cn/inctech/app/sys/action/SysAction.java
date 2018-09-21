@@ -33,7 +33,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.inctech.app.common.exception.AppSysException;
 import cn.inctech.app.sys.bean.SysServiceBean;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class SysAction {
 
@@ -52,7 +54,7 @@ public class SysAction {
 	@RequestMapping("/403")
 	@ResponseBody
     public void access_403() {
-		throw new AppSysException("resource access denied,please try to access again");
+		throw new AppSysException("资源访问被拒绝，请确认访问权限");
 	}
 	
 	@RequestMapping(value = URL_LOGIN_PAGE)
@@ -84,6 +86,7 @@ public class SysAction {
 	@ResponseBody
     public Map<String,Object> get_sms_code(@PathVariable("mobile") String mobile,HttpServletRequest request) {
 		String code=ss.sendSmsCode(mobile);
+		log.info("["+mobile+"]--"+code);
 		request.getSession().setAttribute(SMS_CODE_KEY_OF_CUR_SESSION, code);
 		Map<String,Object> r=new HashMap<>();
 		r.put(RESULT_KEY_CODE, RESULT_CODE_SUCCESS);

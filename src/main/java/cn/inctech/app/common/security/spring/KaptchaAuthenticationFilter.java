@@ -18,6 +18,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -50,6 +51,7 @@ public class KaptchaAuthenticationFilter extends AbstractAuthenticationProcessin
     }
     
     String servletPath;
-    @Value("${kaptcha.input.name}") String param_name="image_kaptcha";
-    @Value("${kaptcha.session.key}") String skey="kaptcha.code";
+    @Setter @Value("${kaptcha.input.name:image_kaptcha}") String param_name; //@Value not be used
+    @Setter @Value("${kaptcha.session.key:kaptcha_session_code}") String skey;
+    
 }

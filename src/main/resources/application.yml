@@ -70,7 +70,7 @@ webapp:
   security:
     jdbc:
       sql_query_user_by_name: select userid,password,true from v_user where userid =?
-      sql_query_auth_by_name: select userid username,authority from v_userauth where userid=?
+      sql_query_auth_by_name: select username,authority from v_userauth where username=?
       sql_query_user_by_mobile: select count(*) count from v_user where mobile=?
   sms:
     sign_name: IncTech
