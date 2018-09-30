@@ -31,7 +31,7 @@ security:
 
 kaptcha:
   session:
-    key: kaptcha.code
+    key: kaptcha_session_code
   border: no
   #渲染效果：水纹：WaterRipple；鱼眼：FishEyeGimpy；阴影：ShadowGimpy
   obscurificator:
@@ -49,7 +49,7 @@ kaptcha:
     char:
       length: 4
       space: 8
-      string: abcefgijkmnoqrsuvwxyz0123456789
+      string: abcefgijkmnoqrsuvwxyz13579
   background:
     clear:
       from: 247,247,247
@@ -57,7 +57,7 @@ kaptcha:
           
   chkurl: /sys/img_code
   input:
-      name: image_kaptcha
+      name: imgcode
 
 webapp:
   use_pageHelper: false
@@ -75,4 +75,5 @@ webapp:
   sms:
     sign_name: IncTech
     template_code: SMS_142090353
+  cors_allow_url: http://localhost:9999  
     

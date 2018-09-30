@@ -87,6 +87,18 @@ public class GeneralUtil {
 		return bcrPasswordEncoder.encode(plain);
 	}
 	
+	/**
+	 * 判断明文是否符合Bcr密文
+	 * @param plain
+	 * @param cipher
+	 * @return
+	 */
+	public boolean isMatchBcrPass(String plain,String cipher) {
+		if(StringUtils.isEmpty(plain)||!cipher.startsWith("$2a$"))
+			return false;
+		return bcrPasswordEncoder.matches(plain, cipher);
+	}
+	
 	final static String SMS_SEND_CODE_ERROR="向短信服务器中心发送验证码消息失败";
 	Random random=new Random();
 	

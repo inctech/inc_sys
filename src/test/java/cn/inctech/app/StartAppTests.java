@@ -45,6 +45,7 @@ public class StartAppTests {
 		p="helloworld";
 		r=bcrPasswordEncoder.encode(p);
 		System.out.println(r+":"+r.length());
+		System.out.println(bcrPasswordEncoder.matches(p, r));
 	}
 	
 	
