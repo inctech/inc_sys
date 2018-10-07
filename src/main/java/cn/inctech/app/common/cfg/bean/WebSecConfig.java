@@ -53,7 +53,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
     	}
 		http.authorizeRequests()
 		.antMatchers(kaptcha_url,UA_CSS, UA_JS, UA_FONTS, UA_FAVICON,U_LOGIN,U_LOGOUT,U_LOGIN_PAGE,UA_TEST,U_SMS_CODE+"/*",U_SYS_CODE+"/*",UA_USER_REGIST).permitAll()
-		.antMatchers("/","/sys/userinfo","/sys/logout").hasAnyAuthority("jobseeker")
+		.antMatchers("/","/sys/userinfo","/sys/logout","/talents/**").hasAnyAuthority("jobseeker")
 		.antMatchers("/**").hasAnyAuthority("admin")
 		.anyRequest().fullyAuthenticated()
 		.and().formLogin().successHandler(new AuthenticationSuccessHandler() {
