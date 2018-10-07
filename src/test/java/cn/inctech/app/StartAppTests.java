@@ -16,12 +16,15 @@ import com.aliyuncs.exceptions.ClientException;
 
 import cn.inctech.app.common.dao.jdbc.sql.JdbcQueryBean;
 import cn.inctech.app.common.sms.aliyun.AliyunSms;
+import cn.inctech.app.sys.bean.SysServiceBean;
+import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class StartAppTests {
 
-	@Test
+	
 	public void testJdbcQuery() {
 		String sql="select mobile from v_user where userid=:userid";
 		Map<String,Object> param=new HashMap<String,Object>();
@@ -31,6 +34,12 @@ public class StartAppTests {
 		sql="select count(*) count from v_user where userid=:userid";
 		Object c=jqb.querySingle(sql, param).get("count");
 		System.out.println(c+c.getClass().getName());
+	}
+	
+	@Test
+	public void testLambdaGroup() {
+		log.info(ss.getAllCode()+"#####");
+		log.info(ss.getCode("sex")+"****");
 	}
 	
 	@Test
@@ -80,6 +89,7 @@ public class StartAppTests {
 	    return randomNumStr;
 	}
 	
+	@Resource SysServiceBean ss;
 	@Resource PasswordEncoder bcrPasswordEncoder;
 	@Resource AliyunSms sms;
 	@Resource JdbcQueryBean jqb;

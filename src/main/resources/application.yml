@@ -75,5 +75,5 @@ webapp:
   sms:
     sign_name: IncTech
     template_code: SMS_142090353
-  cors_allow_url: http://localhost:9999  
+  cors_allow_url: http://localhost:8080  
     

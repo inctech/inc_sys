@@ -1,3 +1,18 @@
+CREATE VIEW v_userauth AS 
+SELECT 
+  ur.userid username,
+  r.rolename authority 
+FROM
+  s_user_role ur 
+  JOIN s_role r 
+    ON ur.roleid = r.roleid 
+UNION
+SELECT 
+  userid AS username,
+  'jobseeker' AS authority 
+FROM
+  b_user
+    
 The type org.springframework.context.ConfigurableApplicationContext cannot be resolved
 	mvn dependency:purge-local-repository
 

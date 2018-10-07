@@ -12,7 +12,7 @@ import cn.inctech.app.biz.demo.user.dao.DemoUserModel;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DemoUserServiceImpTest {
+public class UserServiceImpTest {
 
 	@Test
 	public void testQueryUsers() {

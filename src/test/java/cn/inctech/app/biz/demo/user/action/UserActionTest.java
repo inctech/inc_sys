@@ -19,15 +19,28 @@ import org.springframework.web.context.WebApplicationContext;
 @SpringBootTest
 @AutoConfigureMockMvc
 @WebAppConfiguration
-public class DemoUserActionTest {
 
-	@Test
+public class UserActionTest {
+
+	/*@Test*/
 	public void testUser_insert()  throws Exception {
-		String url_01="/user_insert";
+		String url_01="/sys/user_regist";
 		mvc.perform(MockMvcRequestBuilders.get(url_01)
-				.param("userid", "tom_001").param("email", "tom@ly.com")
-				.param("descr", "World").param("password", "ares")
-				.param("status", "true").param("username", "little tom"))
+				.param("userid", "user2").param("email", "tom@ly.com")
+				.param("descr", "World").param("password", "123456")
+				.param("status", "true").param("username", "user2"))
+		.andExpect(MockMvcResultMatchers.status().isOk())
+		.andDo(MockMvcResultHandlers.print());
+	}
+	
+	@Test
+	public void tes_allcode()  throws Exception {
+		String url_01="/sys/sys_code/all";
+		mvc.perform(MockMvcRequestBuilders.get(url_01))
+		.andExpect(MockMvcResultMatchers.status().isOk())
+		.andDo(MockMvcResultHandlers.print());
+		url_01="/sys/sys_code/sex";
+		mvc.perform(MockMvcRequestBuilders.get(url_01))
 		.andExpect(MockMvcResultMatchers.status().isOk())
 		.andDo(MockMvcResultHandlers.print());
 	}
