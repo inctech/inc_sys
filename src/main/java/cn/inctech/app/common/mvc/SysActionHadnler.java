@@ -1,11 +1,6 @@
 package cn.inctech.app.common.mvc;
 
-import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_BOOL_FAILED;
-import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_CODE_FAILED;
-import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_KEY_CODE;
-import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_KEY_MSG;
-import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_KEY_SUCCESS;
-import static cn.inctech.app.common.cfg.param.GlobalConfig.RETCODE_SYS_PROCESS_ERROR;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,9 +28,9 @@ public class SysActionHadnler {
 	public Map<String, Object> handle_iae_exception(HttpServletRequest request, Exception e) {
 		log.debug(e.getMessage());
 		Map<String, Object> m = new HashMap<>();
-		m.put(RESULT_KEY_CODE, RESULT_CODE_FAILED);
-		m.put(RESULT_KEY_SUCCESS, RESULT_BOOL_FAILED);
-		m.put(RESULT_KEY_MSG, e.getMessage());
+		m.put(RK_CODE, RC_FAILED);
+		m.put(RK_SUCCESS, RV_B_FAILED);
+		m.put(RK_MSG, e.getMessage());
 		return m;
 	}
 	
@@ -45,9 +40,9 @@ public class SysActionHadnler {
 	public Map<String, Object> handle_uc_exception(HttpServletRequest request, Exception e) {
 		log.debug(e.getMessage());
 		Map<String, Object> m = new HashMap<>();
-		m.put(RESULT_KEY_CODE,((UDException)e).getRetCode());
-		m.put(RESULT_KEY_SUCCESS, RESULT_BOOL_FAILED);
-		m.put(RESULT_KEY_MSG, e.getMessage());
+		m.put(RK_CODE,((UDException)e).getRetCode());
+		m.put(RK_SUCCESS, RV_B_FAILED);
+		m.put(RK_MSG, e.getMessage());
 		return m;
 	}
 	
@@ -57,9 +52,9 @@ public class SysActionHadnler {
 	public Map<String, Object> handle_unknow_exception(HttpServletRequest request, Exception e) {
 		log.debug(e.getMessage());
 		Map<String, Object> m = new HashMap<>();
-		m.put(RESULT_KEY_CODE,RETCODE_SYS_PROCESS_ERROR);
-		m.put(RESULT_KEY_SUCCESS, RESULT_BOOL_FAILED);
-		m.put(RESULT_KEY_MSG, e.getMessage());
+		m.put(RK_CODE,RC_SYS_PROCESS_ERROR);
+		m.put(RK_SUCCESS, RV_B_FAILED);
+		m.put(RK_MSG, e.getMessage());
 		return m;
 	}
 	
@@ -69,9 +64,10 @@ public class SysActionHadnler {
 		Map<String, Object> m = new HashMap<>();
         StringBuilder err_msg = new StringBuilder();
         ex.getFieldErrors().stream().forEach(e->err_msg.append(e.getField()).append("=[").append(e.getRejectedValue()).append("]--").append(e.getDefaultMessage()).append("\n\r"));
-        m.put(RESULT_KEY_CODE,RETCODE_SYS_PROCESS_ERROR);
-		m.put(RESULT_KEY_SUCCESS, RESULT_BOOL_FAILED);
-		m.put(RESULT_KEY_MSG, err_msg.toString());
+        m.put(RK_CODE,RC_SYS_PROCESS_ERROR);
+		m.put(RK_SUCCESS, RV_B_FAILED);
+		m.put(RK_MSG, err_msg.toString());
+		log.info(err_msg+"");
         return m;
     }
 }

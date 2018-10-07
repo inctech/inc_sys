@@ -1,6 +1,6 @@
 package cn.inctech.app.common.exception;
 
-import static cn.inctech.app.common.cfg.param.GlobalConfig.RETCODE_SYS_PROCESS_ERROR;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RC_SYS_PROCESS_ERROR;
 
 /**
  * App Sys Exception
@@ -29,6 +29,6 @@ public class AppSysException extends UDException {
 		return RETCODE;
 	}
 
-	final static int RETCODE=RETCODE_SYS_PROCESS_ERROR;
+	final static int RETCODE=RC_SYS_PROCESS_ERROR;
 	
 }

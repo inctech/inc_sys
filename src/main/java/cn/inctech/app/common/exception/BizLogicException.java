@@ -4,7 +4,7 @@
  */
 package cn.inctech.app.common.exception;
 
-import static cn.inctech.app.common.cfg.param.GlobalConfig.RETCODE_BS_PROCESS_ERROR;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RC_BS_PROCESS_ERROR;
 
 @SuppressWarnings("serial")
 public class BizLogicException extends UDException {
@@ -29,5 +29,5 @@ public class BizLogicException extends UDException {
 		return retCode;
 	}
 
-	final static int retCode=RETCODE_BS_PROCESS_ERROR;
+	final static int retCode=RC_BS_PROCESS_ERROR;
 }

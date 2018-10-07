@@ -1,6 +1,6 @@
 package cn.inctech.app.common.security.spring;
 
-import static cn.inctech.app.common.cfg.param.GlobalConfig.RESULT_MSG_VALID_CODE_ERR;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RM_VALID_CODE_ERR;
 
 import java.io.IOException;
 
@@ -38,7 +38,7 @@ public class KaptchaAuthenticationFilter extends AbstractAuthenticationProcessin
         if ("POST".equalsIgnoreCase(req.getMethod()) && servletPath.equals(req.getServletPath())) {
             String expect = (String) req.getSession().getAttribute(skey);
             if (expect != null && !expect.equalsIgnoreCase(req.getParameter(param_name))) {
-                unsuccessfulAuthentication(req, res, new InsufficientAuthenticationException(RESULT_MSG_VALID_CODE_ERR));
+                unsuccessfulAuthentication(req, res, new InsufficientAuthenticationException(RM_VALID_CODE_ERR));
                 return;
             }
         }
