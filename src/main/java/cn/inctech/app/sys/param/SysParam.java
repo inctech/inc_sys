@@ -8,8 +8,10 @@ public class SysParam {
     
 	public static final String POINTCUT_SERVICE="execution(* cn.inctech.app..*ServiceImp*.*(..))";
 	public static final String POINTCUT_DAO="execution(* cn.inctech.app..*Mapper*.*(..)) || execution(* cn.inctech.app..*Dao*.*(..))";
+	public static final String POINTCUT_ACTION="execution(* cn.inctech.app..*Action*.*(..))";
 	
-	//CR=>current_request	request CU=>current_user		session
+	
+	//CR=>current_request	request CU=>current_user session
 	public static final String CR_CURRENT_PAGE="currentPage";
 	public static final String CR_PAGE_SIEZ="pageSize";
 	

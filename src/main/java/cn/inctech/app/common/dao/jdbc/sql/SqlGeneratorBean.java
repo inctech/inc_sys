@@ -86,6 +86,8 @@ public class SqlGeneratorBean {
 		sql1.append("(");
 		sql2.append("(");
 		for(String k:entity.keySet()) {
+			if("class".equalsIgnoreCase(k))
+				continue;
 			if(entity.get(k)!=null) {
 				if(tab.isIgnorekey()&&tab.getKeyname().equalsIgnoreCase(k))
 					continue;
@@ -118,6 +120,8 @@ public class SqlGeneratorBean {
 		Map<String,Object> p=new HashMap<String,Object>();
 		Object v=null;
 		for(String k:m.keySet()) {
+			if("class".equalsIgnoreCase(k))
+				continue;
 			if((v=m.get(k))!=null)
 				p.put(k, v);
 		}

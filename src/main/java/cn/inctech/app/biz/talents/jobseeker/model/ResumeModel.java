@@ -14,7 +14,7 @@ public class ResumeModel {
 	private Integer resid;//简历id
 	@NotBlank(message="姓名不能为空") private String name;            
 	@NotBlank(message="性别不能为空")  private String sex;             
-	@NotBlank(message="出生日期不能为空") @DateTimeFormat(pattern = "yyyy-MM-dd") private Date birthday;        
+	/*@NotBlank(message="出生日期不能为空")*/ @DateTimeFormat(pattern = "yyyy-MM-dd") private Date birthday;        
 	private String birthorigin;
 	@NotBlank(message="身份证号不能为空") private String cardid;  
 	@NotBlank(message="手机不能为空") private String mobile;          
@@ -23,8 +23,6 @@ public class ResumeModel {
 	/*@NotBlank(message="邮箱不能为空")*/private String email;//
 	private String curlivecity;//现居住城市
 	private String eduback;//教育经历      
-	/*private String langt;//外语种类       
-	private String langlvl;//外语等级*/
 	private String jlang;//日语等级
 	private String elang;//英语等级
 	@NotBlank(message="微信号不能为空")private String wishindustry;//希望从事行业
@@ -39,5 +37,8 @@ public class ResumeModel {
 	private String resmvlink;//简历视频链接      
 	private byte[] idphoto;//
 	private String userid;//外键
+	
+	/*private String langt;//外语种类       
+	private String langlvl;//外语等级*/
 	
 }

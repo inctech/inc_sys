@@ -23,10 +23,15 @@ public class JobSeekerServiceImp implements JobSeekerService {
 	
 	@Override
 	public void savetResume(ResumeModel rm) {
-		if(rm.getResid()==null)
-			jsm.insertResume(rm);
-		else
+		if(jsm.isExistResumeForUserid(rm.getUserid()))
 			jsm.updateResume(rm);
+		else
+			jsm.insertResume(rm);
+	}
+	
+	@Override
+	public ResumeModel getResumeByUserid(String userid) {
+		return jsm.getResumeByUserid(userid);
 	}
 	
 	@Resource JobseekerMapper jsm;

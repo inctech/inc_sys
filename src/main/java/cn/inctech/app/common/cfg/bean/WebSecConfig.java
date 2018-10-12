@@ -53,7 +53,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
     	}
 		http.authorizeRequests()
 		.antMatchers(kaptcha_url,UA_CSS, UA_JS, UA_FONTS, UA_FAVICON,U_LOGIN,U_LOGOUT,U_LOGIN_PAGE,UA_TEST,U_SMS_CODE+"/*",U_SYS_CODE+"/*",UA_USER_REGIST).permitAll()
-		.antMatchers("/","/sys/userinfo","/sys/logout","/talents/**").hasAnyAuthority("jobseeker")
+		.antMatchers("/","/sys/**","/talents/**").hasAnyAuthority("jobseeker")
 		.antMatchers("/**").hasAnyAuthority("admin")
 		.anyRequest().fullyAuthenticated()
 		.and().formLogin().successHandler(new AuthenticationSuccessHandler() {
@@ -76,11 +76,11 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
 				log.info("[username is:] "+currentUser.get(CU_KEY_USERNAME)+", [auth is:] "+currentUser.get(CU_KEY_USERROLE)+":"+request.getRequestURI()+":"+e.getMessage());
 				//e.printStackTrace();
 			}
-        }).accessDeniedPage("/403");
+        })/*.accessDeniedPage("/403")*/;
 		
 		http.headers().frameOptions().sameOrigin(); // 允许来自同一来源的 控制台的请求
 		//http.csrf().disable();
-        http.csrf().ignoringAntMatchers(U_LOGIN+"*",SYS_PATH+"/**",U_LOGOUT+"*");
+        http.csrf().ignoringAntMatchers(U_LOGIN+"*",SYS_PATH+"/**",U_LOGOUT+"*","/talents/**");
 	}
 	
     protected void xxconfigure(HttpSecurity http) throws Exception {

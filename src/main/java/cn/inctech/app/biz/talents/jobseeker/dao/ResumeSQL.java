@@ -1,7 +1,5 @@
 package cn.inctech.app.biz.talents.jobseeker.dao;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Component;
 
 import cn.inctech.app.biz.talents.jobseeker.model.ResumeModel;
@@ -22,10 +20,10 @@ public class ResumeSQL {
 	TableModel getTabConfig() {
 		TableModel tab=new TableModel();
 		tab.setIgnorekey(false);
-		tab.setKeyname("resid");
+		tab.setKeyname("userid");
 		tab.setTablename("t_resume");
 		return tab;
 	}
 	
-	@Resource SqlGeneratorBean ssg;
+	static final SqlGeneratorBean ssg=new SqlGeneratorBean();
 }

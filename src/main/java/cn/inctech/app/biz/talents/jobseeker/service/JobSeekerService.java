@@ -10,4 +10,6 @@ public interface JobSeekerService {
 	
 	void savetResume(ResumeModel rm);
 	
+	ResumeModel getResumeByUserid(String userid);
+	
 }

@@ -32,6 +32,7 @@ public class BizAdvice {
 			r=pjp.proceed();
 		}catch(DataAccessException e) {
 			log.error("mehtod--["+method+"] error: "+e.getMessage());
+			e.printStackTrace();
 			throw new BizLogicException(e);
 		}catch(BizLogicException e) {
 			throw e;

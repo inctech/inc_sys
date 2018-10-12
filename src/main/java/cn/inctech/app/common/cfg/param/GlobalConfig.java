@@ -20,6 +20,7 @@ public class GlobalConfig {
 	public static final String RK_CODE="code";
 	public static final String RK_MSG="message";
 	public static final String RK_SUCCESS="success";
+	public static final String RK_DATA="data";
 	
 	public static final String RV_S_SUCCESS="success";
 	public static final Boolean RV_B_SUCCESS=Boolean.TRUE;

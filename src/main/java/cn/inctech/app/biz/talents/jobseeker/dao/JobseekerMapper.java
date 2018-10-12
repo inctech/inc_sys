@@ -3,6 +3,7 @@ package cn.inctech.app.biz.talents.jobseeker.dao;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.UpdateProvider;
 
 import cn.inctech.app.biz.talents.jobseeker.model.ResumeModel;
@@ -20,5 +21,10 @@ public interface JobseekerMapper {
 	@UpdateProvider(type=cn.inctech.app.biz.talents.jobseeker.dao.ResumeSQL.class,method="updateSQL")
 	void updateResume(ResumeModel rm);
 	
+	@Select("select * from t_resume where userid=#{userid}")
+	ResumeModel getResumeByUserid(String userid);
+	
+	@Select("select count(*) > 0  from t_resume where userid=#{userid}")
+	boolean isExistResumeForUserid(String userid);
 	
 }
