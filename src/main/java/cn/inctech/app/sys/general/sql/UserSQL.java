@@ -1,13 +1,13 @@
 package cn.inctech.app.sys.general.sql;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Component;
 
 import cn.inctech.app.common.dao.jdbc.sql.SqlGeneratorBean;
 import cn.inctech.app.common.dao.jdbc.sql.TableModel;
 import cn.inctech.app.sys.general.model.UserModel;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class UserSQL {
 
@@ -16,6 +16,7 @@ public class UserSQL {
 	}
 	
 	public String updateSQL(UserModel params) {
+		log.info(ssg.updateSQL(params, getTabConfig()));
 		return ssg.updateSQL(params, getTabConfig());
 	}
 	
@@ -27,5 +28,5 @@ public class UserSQL {
 		return tab;
 	}
 	
-	@Resource SqlGeneratorBean ssg;
+	static final SqlGeneratorBean ssg=new SqlGeneratorBean();
 }

@@ -1,7 +1,15 @@
 package cn.inctech.app.sys.general.action;
 
-import static cn.inctech.app.common.cfg.param.GlobalConfig.*;
-
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RC_SUCCESS;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RK_CODE;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RK_MSG;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RK_SUCCESS;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RM_SUCCESS_LOGIN;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.RV_B_SUCCESS;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.SMS_CODE_KEY_OF_CUR_SESSION;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.UA_USER_REGIST;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.U_SMS_CODE;
+import static cn.inctech.app.common.cfg.param.GlobalConfig.U_SYS_CODE;
 import static cn.inctech.app.sys.param.SysParam.CU_KEY_USERNAME;
 import static cn.inctech.app.sys.param.SysParam.CU_KEY_USERROLE;
 
@@ -21,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.inctech.app.common.exception.AppSysException;
 import cn.inctech.app.sys.bean.SysServiceBean;
+import cn.inctech.app.sys.general.model.UserChPassModel;
 import cn.inctech.app.sys.general.model.UserModel;
 import cn.inctech.app.sys.general.service.GeneralService;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +40,7 @@ public class GeneralAction {
 
 	@RequestMapping(UA_USER_REGIST)
 	@ResponseBody
-	public Map<String,Object> regist_user(@Valid @RequestBody UserModel u,HttpServletRequest request){
+	public Map<String,Object> user_regist(@Valid @RequestBody UserModel u,HttpServletRequest request){
 		String ui_smscode=u.getSmscode();
 		String ui_imgcode=u.getImgcode();
 		String sys_smscode=""+request.getSession().getAttribute(SMS_CODE_KEY_OF_CUR_SESSION);
@@ -46,6 +55,16 @@ public class GeneralAction {
 		request.getSession().removeAttribute(skey);
 		Map<String,Object> r=new HashMap<>();
 		r.put("success", Boolean.TRUE);
+		return r;
+	}
+	
+	@RequestMapping("/sys/user_chpass")
+	@ResponseBody
+	public Map<String,Object> user_chpass(@RequestBody UserChPassModel m){
+		Map<String,Object> r=new HashMap<>();
+		String username=currentUser.get(CU_KEY_USERNAME)+"";
+		gs.updatePassByUserid(username, m.getOldpass(), m.getNewpass());
+		r.put("message", "修改口令成功");
 		return r;
 	}
 	

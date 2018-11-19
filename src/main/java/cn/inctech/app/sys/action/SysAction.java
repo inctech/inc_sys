@@ -60,6 +60,4 @@ public class SysAction {
 		return r;
 	}
 	
-	
-	
 }

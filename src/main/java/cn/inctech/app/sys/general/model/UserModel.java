@@ -21,7 +21,7 @@ public class UserModel {
 	@NotBlank(message = "用户口令不能为空")
 	private String password;//由前台完成密码两次输入是否一致
 	
-	private boolean status;//注册时自动设置为真
+	private Boolean status;//注册时自动设置为真
 	
 	//@NotBlank(message = "邮箱不能为空")
 	@Email(message = "邮箱格式错误")

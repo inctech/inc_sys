@@ -32,6 +32,7 @@ public class GeneralServiceImp implements GeneralService {
 			throw new BizLogicException(PASS_ERROR);
 		u=new UserModel();
 		u.setUserid(userid);
+		newPass=gu.buildBcrPass(newPass);
 		u.setPassword(newPass);
 		gm.updateUser(u);
 	}
@@ -56,7 +57,5 @@ public class GeneralServiceImp implements GeneralService {
 	
 	public static void main(String[] args) {
 	}
-
-	
 
 }

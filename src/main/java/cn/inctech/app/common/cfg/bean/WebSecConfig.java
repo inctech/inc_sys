@@ -68,7 +68,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
             	request.getRequestDispatcher(U_LOGIN_SUCCESS).forward(request, response);
             }
         })
-		.loginPage(U_LOGIN).loginPage(U_LOGIN_PAGE).failureUrl(U_LOGIN_PASS_ERROR)
+		.loginPage(U_LOGIN).loginPage(U_LOGIN_PAGE).failureUrl(U_LOGIN_PASS_ERROR).permitAll()
 		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher(U_LOGOUT)).logoutSuccessUrl("/").invalidateHttpSession(true)
 		.and().exceptionHandling().accessDeniedHandler(new AccessDeniedHandler() {
 			@Override
@@ -76,7 +76,7 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
 				log.info("[username is:] "+currentUser.get(CU_KEY_USERNAME)+", [auth is:] "+currentUser.get(CU_KEY_USERROLE)+":"+request.getRequestURI()+":"+e.getMessage());
 				//e.printStackTrace();
 			}
-        })/*.accessDeniedPage("/403")*/;
+        }).accessDeniedPage("/403");
 		
 		http.headers().frameOptions().sameOrigin(); // 允许来自同一来源的 控制台的请求
 		//http.csrf().disable();

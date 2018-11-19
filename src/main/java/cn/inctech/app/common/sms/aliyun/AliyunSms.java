@@ -52,6 +52,6 @@ public class AliyunSms {
     static final String domain = "dysmsapi.aliyuncs.com";//产品域名,开发者无需替换
     // 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
     	
-    final String accessKeyId = "LTAIfQKrOnwybAES";
-    final String accessKeySecret = "F8ZymFgQiZDOQNEYw6jq3sE48tlO52";
+    final String accessKeyId = "LTAIBy05lplmc1wj";
+    final String accessKeySecret = "DsraNFQM1J1QMIwgeFlBlI06FNqbzB";
 }
