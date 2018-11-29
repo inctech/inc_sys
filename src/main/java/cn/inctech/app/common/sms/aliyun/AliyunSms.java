@@ -2,6 +2,9 @@ package cn.inctech.app.common.sms.aliyun;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.aliyuncs.DefaultAcsClient;
@@ -11,6 +14,8 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+
+import cn.inctech.app.common.util.encr.AesUtil;
 
 @Component
 public class AliyunSms {
@@ -22,7 +27,8 @@ public class AliyunSms {
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
 
         //初始化acsClient,暂不支持region化
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
+        //IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", aes.unencr(access_key_id), aes.unencr(access_key_secret));
         DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
         IAcsClient acsClient = new DefaultAcsClient(profile);
 
@@ -51,7 +57,10 @@ public class AliyunSms {
     static final String product = "Dysmsapi";
     static final String domain = "dysmsapi.aliyuncs.com";//产品域名,开发者无需替换
     // 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
-    	
+    
+    @Resource AesUtil aes;
+    @Value("${webapp.sms.access_key_id}") String access_key_id;
+    @Value("${webapp.sms.access_key_secret}") String access_key_secret;
     final String accessKeyId = "LTAIBy05lplmc1wj";
     final String accessKeySecret = "DsraNFQM1J1QMIwgeFlBlI06FNqbzB";
 }

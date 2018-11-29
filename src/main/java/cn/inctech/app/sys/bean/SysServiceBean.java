@@ -29,8 +29,8 @@ public class SysServiceBean {
 	public String sendSmsCode(String mobile) {
 		if(isExistUserForMobile(mobile))
 			throw new AppSysException(MOBILE_ALREADY_EXIST);
-		//String code=gutil.send_sms(mobile); recovery line in real env 
-		String code="1111";//gutil.send_sms(mobile);
+		String code=gutil.send_sms(mobile); //recovery line in real env 
+		//String code="1111";//gutil.send_sms(mobile); //test env
 		return code;
 	}
 	

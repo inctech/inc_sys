@@ -76,7 +76,9 @@ webapp:
       sql_query_auth_by_name: select username,authority from v_userauth where username=?
       sql_query_user_by_mobile: select count(*) count from v_user where mobile=?
   sms:
-    sign_name: IncTech
-    template_code: SMS_142090353
+    sign_name: 正诚云睿
+    template_code: SMS_151549197
+    access_key_id: 58uI/lwGuh/1jRLzQXLnAtz0VSxVkIpbC+2fYXsW6ZI=
+    access_key_secret: 69NuTrnEbvnh6FTaujghq3oSkA31pp7nG9f35388qQQ=
   cors_allow_url: http://localhost:8080  
     

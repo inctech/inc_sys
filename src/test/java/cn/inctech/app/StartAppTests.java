@@ -24,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class StartAppTests {
 
-	
 	public void testJdbcQuery() {
 		String sql="select mobile from v_user where userid=:userid";
 		Map<String,Object> param=new HashMap<String,Object>();
@@ -36,13 +35,12 @@ public class StartAppTests {
 		System.out.println(c+c.getClass().getName());
 	}
 	
-	@Test
+	
 	public void testLambdaGroup() {
 		log.info(ss.getAllCode()+"#####");
 		log.info(ss.getCode("sex")+"****");
 	}
 	
-	@Test
 	public void pass() {
 		String p="A12345671234567891234567891234567891234567891234567891234567891234567890000000890";
 		String r=null;
@@ -58,6 +56,7 @@ public class StartAppTests {
 	}
 	
 	
+	@Test
 	public void send_sms() throws ClientException {
 		String phoneNumber = "17615182526";
 	    String randomNum = createRandomNum(6);
@@ -65,8 +64,8 @@ public class StartAppTests {
 
 	    Map<String, String> paramMap = new HashMap<>();
 	    paramMap.put("PhoneNumbers", phoneNumber);
-	    paramMap.put("SignName", "杨薇");
-	    paramMap.put("TemplateCode", "SMS_142090353");
+	    paramMap.put("SignName", "正诚云睿");
+	    paramMap.put("TemplateCode", "SMS_151549197");
 	    paramMap.put("TemplateParam", jsonContent);
 	    SendSmsResponse sendSmsResponse = sms.sendSms(paramMap);
 	    System.out.println(sendSmsResponse.getBizId()+":"+sendSmsResponse.getCode()+":"+sendSmsResponse.getMessage());
