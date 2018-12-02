@@ -35,7 +35,7 @@ public class StartAppTests {
 		System.out.println(c+c.getClass().getName());
 	}
 	
-	
+	@Test
 	public void testLambdaGroup() {
 		log.info(ss.getAllCode()+"#####");
 		log.info(ss.getCode("sex")+"****");
@@ -56,7 +56,7 @@ public class StartAppTests {
 	}
 	
 	
-	@Test
+	/*@Test*/
 	public void send_sms() throws ClientException {
 		String phoneNumber = "17615182526";
 	    String randomNum = createRandomNum(6);

@@ -23,9 +23,9 @@ spring:
   #jackson:
     #date-format: yyyy-MM-dd
     #time-zone: GMT+8
-  redis:
-    host: 172.24.8.123
-    database: 0
+  #redis:
+    #host: 172.24.8.123
+    #database: 0
  
 security:
   oauth2:

@@ -5,8 +5,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>cn.inctech.app</groupId>
-	<artifactId>inctech_common</artifactId>
-	<version>0.0.5</version>
+	<artifactId>inctech_talents</artifactId>
+	<version>0.0.6</version>
 	<packaging>jar</packaging>
 
 	<name>inc_sys</name>

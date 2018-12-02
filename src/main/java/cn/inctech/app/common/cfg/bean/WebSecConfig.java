@@ -74,9 +74,9 @@ public class WebSecConfig extends WebSecurityConfigurerAdapter {
 			@Override
 			public void handle(HttpServletRequest request, HttpServletResponse response,AccessDeniedException e) throws IOException, ServletException {
 				log.info("[username is:] "+currentUser.get(CU_KEY_USERNAME)+", [auth is:] "+currentUser.get(CU_KEY_USERROLE)+":"+request.getRequestURI()+":"+e.getMessage());
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
-        }).accessDeniedPage("/403");
+        })/*.accessDeniedPage("/403")*/;
 		
 		http.headers().frameOptions().sameOrigin(); // 允许来自同一来源的 控制台的请求
 		//http.csrf().disable();

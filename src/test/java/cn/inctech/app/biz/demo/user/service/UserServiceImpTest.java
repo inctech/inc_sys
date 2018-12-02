@@ -34,7 +34,7 @@ public class UserServiceImpTest {
 		us.insert(u);
 	}
 
-	@Test
+	/*@Test*/
 	public void testTransaction() {
 		hs.insert_trans_test();
 	}
